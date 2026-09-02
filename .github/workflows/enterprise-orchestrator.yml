@@ -1,4 +1,4 @@
-name: CI-WORKFLO
+name: CI-WORKFLOW
 on:
   push:
     branches: master
