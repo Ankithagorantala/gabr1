@@ -1,0 +1,37 @@
+name: Statuschecks
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_package:
+    name: BUILD-JOB
+    runs-on: ubuntu-slim
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript-typescript']
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: BUILD
+        run: npm install
+
+      - name: TEST
+        run: echo "code is tested!"
+
+      - name: Artifact upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: artifact-1
+          path: |
+            package*
+
+      - name: Notify Slack of Success
+        if: success() # Only runs if build AND test passed
+        run: echo "my code is deployed"
