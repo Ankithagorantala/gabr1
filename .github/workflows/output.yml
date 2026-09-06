@@ -21,7 +21,7 @@ jobs:
 
       - name: Create Build Output
         id: build_output
-        run: echo "status=success" >> "$GITHUB_OUTPUT"
+        run: 'echo "status=success" >> "$GITHUB_OUTPUT"'
 
   test:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
         run: echo "code is tested"
 
       - name: Show Build Output
-        run: echo "Build Status: ${{ needs.build.outputs.build_status }}"
+        run: 'echo "Build Status: ${{ needs.build.outputs.build_status }}"'
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,4 +48,4 @@ jobs:
         run: echo "my code is deployed"
 
       - name: Show Build Output
-        run: echo "Build Result: ${{ needs.build.outputs.build_status }}"
+        run: 'echo "Build Result: ${{ needs.build.outputs.build_status }}"'
