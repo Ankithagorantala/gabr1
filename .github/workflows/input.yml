@@ -35,7 +35,7 @@ jobs:
         run: npm install
 
       - name: Show Username
-        run: echo "Username: ${{ inputs.username }}"
+        run: 'echo "Username: ${{ inputs.username }}"
 
   test:
     runs-on: ubuntu-latest
