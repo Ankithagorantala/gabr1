@@ -1,4 +1,4 @@
-name: CI
+name: sequential
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,30 +17,19 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
-    needs:
-      - build
-
+    needs: build
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Test
         run: echo "code is tested"
 
-  security:
-    runs-on: ubuntu-latest
-
-    needs:
-      - test
-
-    steps:
-      - name: Security
-        run: echo "security check completed"
-
   deploy:
     runs-on: ubuntu-latest
-
     needs:
-      - security
-
+      - build
+      - test
     steps:
       - name: Deploy
         run: echo "my code is deployed"
